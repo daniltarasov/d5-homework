@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>Модуль D4</title>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container-fluid">
+        <div class="col-4">
+            {% for publisher in publishers %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    {{  publisher.name }}
+                    <ul class="list-group ">
+                        {% for book in publisher.book_set.all %}
+                            <li class="list-group-item list-group-item-light "> {{ book.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            {% endfor %}
+        </div>
+        </div>
+    </body>
+</html>
