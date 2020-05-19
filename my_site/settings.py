@@ -132,4 +132,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # STATIC_URL = '/static/base-theme-ironwood/' # почему-то в курсе так и нужно для хероку оставить так
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/') #это для хероку. что это?
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/') #это для хероку. что это?
