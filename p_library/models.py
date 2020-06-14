@@ -52,7 +52,8 @@ class Publisher(models.Model):
 
 class Friend(models.Model):
     name = models.CharField(max_length=100)
-    books = models.ManyToManyField("Book")
+    books = models.ManyToManyField("Book", default=None,
+                                  blank=True, null=True)
     class Meta:
         verbose_name = 'Друг'
         verbose_name_plural = 'Друзья'
