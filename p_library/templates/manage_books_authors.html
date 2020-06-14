@@ -7,16 +7,20 @@
 <body>  
 <form method="post">  
   {% csrf_token %}  
-  {% for form in author_formset %}  
-        {{ form.as_ul }}  
-        <br>
-        <br>
+  {% for form in author_formset %}
+    <table>  
+      {{ form }}  
+        <!-- {{ form.as_ul }}   -->
+    </table>
+    <br>
   {% endfor %}  
-  
-    {% for form in book_formset %}  
-        {{ form.as_ul }}  
-        <br> 
-        <br> 
+  <br>
+  {% for form in book_formset %}
+    <table>  
+      {{ form }}  
+        <!-- {{ form.as_ul }}   -->
+    </table>
+    <br>
   {% endfor %}  
     <input type="submit" value="Сохранить"/>  
 </form>  

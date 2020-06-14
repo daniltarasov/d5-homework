@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from p_library.models import Author, Book, Publisher
+# from p_library.models import Author, Book, Publisher
+from p_library.models import Author, Book, Publisher, Friend
+
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
-from p_library.forms import AuthorForm, BookForm
-from django.views.generic import CreateView, ListView
+from p_library.forms import AuthorForm, BookForm, FriendForm
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.forms import formset_factory  
 from django.http.response import HttpResponseRedirect
@@ -13,30 +15,48 @@ from django.http.response import HttpResponseRedirect
 class AuthorEdit(CreateView):  
     model = Author  
     form_class = AuthorForm  
-    success_url = reverse_lazy('author_list')  
+    success_url = reverse_lazy('p_library:author_list')  
     template_name = 'author_edit.html'  
-  
-  
+
 class AuthorList(ListView):  
     model = Author  
     template_name = 'authors_list.html'
 
+class FriendEdit(CreateView):  
+    model = Friend  
+    form_class = FriendForm  
+    success_url = reverse_lazy('friends_list')  
+    template_name = 'friend_edit.html'  
+
+
+class FriendUpdate(UpdateView):
+    model = Friend
+    # form_class = FriendForm  
+    success_url = reverse_lazy('friends_list')  
+    fields = ["name", "books"]
+    template_name = 'friend_edit.html'
+
+class FriendDelete(DeleteView):
+    model = Friend  
+    form_class = FriendForm  
+    success_url = reverse_lazy('friends_list')  
+    template_name = 'friend_delete.html'  
+    fields = ["name", "books"]
+  
+  
 
 def index(request):
     template = loader.get_template('index.html')
-    # books_count = Book.objects.all().count()
     books = Book.objects.all().order_by('publisher')
     numbers = range(100)
     biblio_data = {
         "title": "мою библиотеку",
-        # "books_count": books_count,
         "books": books,
         "numbers": numbers
     }
     return HttpResponse(template.render(biblio_data, request))
 
 
-# Create your views here.
 def books_list(request):
     books = Book.objects.all()
     return HttpResponse(books)
@@ -80,13 +100,22 @@ def book_decrement(request):
 def publishers(request):
     template = loader.get_template('publishers.html')
     publishers = Publisher.objects.all().order_by('name')
-    # dict={}
-    # for publisher in
-    # publisher_books =
     publisher_data = {
         "publishers": publishers,
     }
     return HttpResponse(template.render(publisher_data, request))
+
+def friends(request):
+    template = loader.get_template('friends.html')
+    friends = Friend.objects.all().order_by('name')
+    friends_data = {
+        "friends": friends,
+    }
+    return HttpResponse(template.render(friends_data, request))
+
+
+
+
 
 def author_create_many(request):  
     AuthorFormSet = formset_factory(AuthorForm, extra=2)  #  Первым делом, получим класс,

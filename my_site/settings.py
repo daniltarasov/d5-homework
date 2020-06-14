@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dj_database_url  #для heroku
+# import dj_database_url  #для heroku
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -22,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'lp_4h@=vn(09!!42ygq3a)@#n8k#9^v_3pf2+i*p9v-d9%0cjy'
-SECRET_KEY = os.environ.get('SECRET_KEY') #для хероку
+SECRET_KEY = 'lp_4h@=vn(09!!42ygq3a)@#n8k#9^v_3pf2+i*p9v-d9%0cjy'
+# SECRET_KEY = os.environ.get('SECRET_KEY') #для хероку
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,17 +81,17 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 """
 для локалки
 """
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 """
 для heroku
 """
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+# DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-STATIC_URL = '/static/base-theme-ironwood/' # почему-то в курсе так и нужно для хероку оставить так
+STATIC_URL = '/static/'
+# STATIC_URL = '/static/base-theme-ironwood/' # почему-то в курсе так и нужно для хероку оставить так
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/') #это для хероку. что это?
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/') #это для хероку. что это?

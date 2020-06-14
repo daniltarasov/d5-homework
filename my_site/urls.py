@@ -14,22 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include  
 from p_library import views
-from p_library.views import AuthorEdit, AuthorList, author_create_many, books_authors_create_many
+# from p_library.views import AuthorEdit, AuthorList, author_create_many, books_authors_create_many
 
-# app_name = 'p_library'
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('p_library.urls')), # include работает, только если его импортировать
     path('', views.books_list),
     path('index/', views.index),
     path('index/book_increment/', views.book_increment),
     path('index/book_decrement/', views.book_decrement),
     path('publishers/', views.publishers),
-    path('author/create', AuthorEdit.as_view(), name='author_create'),  
-    path('authors', AuthorList.as_view(), name='author_list'),  
-    path('author/create_many', author_create_many, name='author_create_many'),
-    path('author_book/create_many', books_authors_create_many, name='author_book_create_many'), 
+    path('friends/', views.friends, name='friends_list'),
+    
+
 ]
 
 

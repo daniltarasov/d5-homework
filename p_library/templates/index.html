@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Книги</title>
 </head>
 <body>
 Добро пожаловать в {{ title }}  <br>.
 Тут собрано {{ books|length }} книг из моей личной коллекции.
 <table border="1">
+    <tr>
+        <th>№</th>
+        <th>Название</th>
+        <th>ISBN</th>
+        <th>Описание</th>
+        <th>Год</th>
+        <th>Автор</th>
+        <th>Страна</th>
+        <th>Кол-во</th>
+        <th>Издатель</th>
+        <th>Должники</th>
+        <th>Изменить количество</th>
+
+    </tr>
     {% for book in books %}
-        <tr>
+        <tr>            
+            <td>{{ forloop.counter }}</td>
             <td>{{ book.title }}</td>
             <td>{{ book.ISBN }}</td>
             <td>{{ book.description }}</td>
@@ -18,6 +33,14 @@
             <td>{{ book.author.country }}</td>
             <td>{{ book.copy_count }}</td>
             <td>{{ book.publisher }}</td>
+            <td>
+                <ul style= "padding-left: 0">
+                    {% for friend in book.friend_set.all %}
+                        <li style = "list-style-type: none;"> {{ friend.name }}</li>
+                        <br>
+                    {% endfor %}
+                </ul>
+            </td>
             <td>
                 <form action="/index/book_increment/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -33,12 +56,6 @@
         </tr>
     {% endfor %}
 </table>
-
-<!--    {% for i in numbers %}-->
-<!--        {% if i|divisibleby:"3" %}-->
-<!--            {{ i }}-->
-<!--        {%endif%}-->
-<!--    {% endfor %}-->
 
 </body>
 </html>

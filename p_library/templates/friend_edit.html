@@ -2,16 +2,21 @@
 <html lang="en">  
 <head>  
 	<meta charset="UTF-8">  
-	<title>Форма создания и редактирования Авторов</title>  
+	<title>Форма создания и редактирования должника</title>  
 </head>  
 <body>  
 <form method="post">  
 	{% csrf_token %}
-	<table>
+    <table>
 		{{ form }}
 	<!-- {{ form.as_p }}  	 -->
 	</table>  
+    <p>Выбрать несколько книг - с нажатым CTRL</p>
 
+	
+
+
+	
 	<input type="submit" value="Сохранить">  
 </form>  
 </body>  
